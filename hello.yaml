@@ -1,0 +1,30 @@
+# The contents of https://github.com/stakater/mto-blogs-acme-gitops: a small
+# web server that runs on OpenShift's default security settings.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+  labels: { app: hello }
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: hello }
+  template:
+    metadata:
+      labels: { app: hello }
+    spec:
+      containers:
+        - name: httpd
+          image: registry.access.redhat.com/ubi9/httpd-24:latest
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello
+spec:
+  selector: { app: hello }
+  ports:
+    - port: 8080
+      targetPort: 8080
