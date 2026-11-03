@@ -1,0 +1,10 @@
+# In https://github.com/stakater/mto-blogs-acme-gitops, under quota/: a
+# ResourceQuota, which Multi-Tenant Operator owns in tenant namespaces. An
+# Application that tries to deploy it is refused by acme's project.
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: more-pods
+spec:
+  hard:
+    pods: "100"
